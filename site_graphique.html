@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Graphique dynamique</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="p-6" style="font-family: Arial, sans-serif;">
+
+<h2>Entre des valeurs :</h2>
+
+<input id="inputValue" type="number" placeholder="Entrez un nombre" style="padding: 8px; margin-right: 8px;">
+<button onclick="addValue()" style="padding: 8px 12px; cursor: pointer;">Ajouter</button>
+
+<div style="width: 600px; margin-top: 30px;">
+  <canvas id="myChart"></canvas>
+</div>
+
+<script>
+let data = [];
+let labels = [];
+
+const ctx = document.getElementById('myChart');
+const chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Données entrées',
+            data: data,
+            borderWidth: 2
+        }]
+    }
+});
+
+function addValue() {
+    const val = document.getElementById('inputValue').value;
+    if (val !== '') {
+        labels.push(labels.length + 1);
+        data.push(Number(val));
+        chart.update();
+    }
+}
+</script>
+
+</body>
+</html>
